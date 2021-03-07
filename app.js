@@ -10,9 +10,11 @@ const express = require("express"),
     var compression = require('compression');
     var helmet = require('helmet');
    const User = require("./models/user");
+    var dev_db_url='mongodb+srv://user:mypass@qnadb.tioei.mongodb.net/qnadb?retryWrites=true&w=majority'
+    var mongoDB=process.env.MONGODB_URI || dev_db_url;
 
 
-mongoose.connect('mongodb+srv://user:mypass@qnadb.tioei.mongodb.net/qnadb?retryWrites=true&w=majority', {
+mongoose.connect(mongoDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('Connected to DB!')).catch(error => console.log(error.message));
