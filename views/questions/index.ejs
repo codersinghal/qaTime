@@ -1,0 +1,119 @@
+
+<%- include("../partials/header") %>
+<script src="/public/js/index.js"></script>
+<div>
+  <br>
+</div>
+<div class="container-fullwidth" style="margin: 0px;">
+  <h1></h1>
+  <div class="row">
+    <div class="col-sm-3" style="padding: 5px; margin-top: 0px; position: fixed; height: 100%;">
+      <div class="container" style="background-color: lightblue; height: 100%; padding-top: 40px; border-bottom-right-radius: 80px; border-top-right-radius: 80px;">
+      <div class="container mt-1 d-flex justify-content-center">
+        <div class="card p-4 mt-3" id="pcard">
+            <div class="first">
+                <h6 class="heading">Harshit Singhal</h6>
+                <div class="time d-flex flex-row align-items-center justify-content-between mt-3">
+                    <div class="d-flex align-items-center"> <i class="fa fa-clock-o clock"></i> <span class="hour ml-1">Student</span> </div>
+                </div>
+            </div>
+            <div class="second d-flex flex-row mt-2">
+                <div class="image mr-3"> <img src="https://support.hubstaff.com/wp-content/uploads/2019/08/good-pic.png" class="rounded-circle" width="60" /> </div>
+            </div>
+            <hr class="line-color">
+            <h6>48 comments</h6>
+        </div>
+    </div>
+  
+      <div class="list-group" style="margin-top: 50px;">
+        <div class=" list-group-item"><input type="search" class="form-control rounded" placeholder="Search Tags" aria-label="Search"
+          aria-describedby="search-addon" /></div>
+        <a class="list-group-item d-flex justify-content-between align-items-center">java<span class="badge bg-primary rounded-pill">14</span></a>
+        <a class="list-group-item d-flex justify-content-between align-items-center">javascript<span class="badge bg-primary rounded-pill">14</span></a>
+        <a class="list-group-item d-flex justify-content-between align-items-center">android<span class="badge bg-primary rounded-pill">14</span></a>
+      </div>
+      <div class="list-group">
+        <div class="list-group-item"><input type="search" class="form-control rounded" placeholder="Search Tutors" aria-label="Search"
+          aria-describedby="search-addon" /></div>
+        <a class="list-group-item d-flex justify-content-between align-items-center">Elon Musk<span class="badge bg-primary rounded-pill">14</span></a>
+        <a class="list-group-item d-flex justify-content-between align-items-center">Sundar Pichai<span class="badge bg-primary rounded-pill">14</span></a>
+        <a class="list-group-item d-flex justify-content-between align-items-center">Bill Gates<span class="badge bg-primary rounded-pill">14</span></a>
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-9 ms-auto" style="margin-top: 50px;">
+      <div class="container" style="border: gray; border-radius: 8px; border-width: 5px;">
+        <% if(currentUser && currentUser.isTeacher) { %>
+          <h1 style="margin-left: 23px;">You have logged in as a teacher</h1>
+          <% } %>
+          <% if(currentUser && !currentUser.isTeacher) { %>
+            <h1 style="margin-left: 23px;">You have logged in as a student</h1>
+            <% } %>
+          <br>
+          <br>
+          <div style="display: flex;">
+            <div class="input-group" style="width: 70%; margin-left: 30px;">
+              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" id="searchCon" onkeyup="searchfunc()"/>
+              <button type="button" class="btn btn-outline-primary">search</button>
+            </div>
+            <a class="btn btn-success ms-auto" href="/QNA/new">Ask A Question</a>
+        </div>
+        <br>
+        <br>
+        <div style="margin-left: 15px;" id="queslist">
+          <% question.forEach(function(question){ %>
+            <div class="card text-center" style="margin: 14px; width: 99%;">
+              <div class="card-header" style="display: flex;">
+                <div class="me-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F6811A" class="bi bi-clock" viewBox="0 0 16 16">
+                  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+                <%= question.created.toDateString() %>
+              </div>
+              <div class="ms-auto">
+                <% if(question.answer.length === 0) { %>
+                  <div class="ms-auto">
+                    <span style="color: red;">Unanswered</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg>
+                  </div>
+               <% } %>
+               <% if(question.answer.length!=0) { %>
+                <div class="ms-auto">
+                  <span style="color:green;">Answered</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                  </svg>
+                </div>
+                <% } %>
+              </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= question.subject %></h5>
+                <p class="card-text"><%= question.question %><% for(var i=0;i<question.tags.length;i++) { %>
+                  <span class="badge rounded-pill bg-info" style="color: white;"><%= question.tags[i] %></span>
+                <% } %>
+              </p> 
+                <a href="/QNA/<%= question._id %>" class="btn btn-primary">More Info</a>
+              </div>
+              <div class="card-footer text-muted" style="display: flex;">
+                <div class="me-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1A6DF6" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                  <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                </svg>
+                <%= question.author.username %>
+              </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

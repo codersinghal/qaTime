@@ -1,0 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+img {
+  height: 200px;
+  width: 100%;
+}
+.right_allign{
+  text-align-last: right;
+}
+.deleteForm{
+  display: inline;
+}
+
+.well{
+  margin: 10px 0px;
+}
+.list-group+.list-group{
+  margin-top: 80px;
+}
+.form-group+.form-group{
+  margin-top: 40px;
+}
+#pcard {
+  background-color: #B9F6CA;
+  width: 350px;
+  border-radius: 20px
+}
+
+.heading {
+  font-weight: 700
+}
+
+.hour {
+  margin-top: 1px;
+  color: green;
+  font-size: 12px
+}
+
+.ratings i {
+  color: #388E3C
+}
+
+
+.line-color {
+  color: green;
+  height: 3px
+}
+.card {
+  border-radius: 15px;
+}
